@@ -1,0 +1,102 @@
+<!-- Счета / субсчета -->
+<div>
+  <button pButton type="button" (click)="addAccount()" icon="fa-plus-square-o" class="ui-button-secondary" title="Добавить счет"></button>
+  <button pButton type="button" (click)="editAccount()" icon="fa-pencil-square-o" class="ui-button-secondary" title="Редактировать счет"></button>
+  <button pButton type="button" (click)="removeAccount()" icon="fa-minus-square-o" class="ui-button-secondary" title="Удалить счет"></button>
+</div>
+
+<div>
+  <p-dataTable [value]="accounts" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10" [rowsPerPageOptions]="[5,50,100]">
+    <p-header>Счета / субсчета</p-header>
+    
+    <p-column field="accountNumber" header="Номер счета / субсчета"></p-column>
+    <p-column field="accountType" header="Тип счета / субсчета"></p-column>
+    <p-column field="storage" header="Место хранения"></p-column>
+    <p-column field="isin" header="ISIN ЦБ"></p-column>
+    <p-column field="depoCode" header="Депозитарный код ЦБ"></p-column>
+    <p-column field="description" header="Описание ЦБ"></p-column>
+    <p-column field="balance" header="Остаток"></p-column>
+
+    <ng-template pTemplate="emptymessage">
+      Нет данных для отображения
+    </ng-template>
+  </p-dataTable>
+</div>
+
+<div class="delimeter"></div>
+
+<!-- Разделы счета / субсчета -->
+<div>
+  <p-dataTable [value]="accountSections" [responsive]="true">
+    <p-header>Разделы счета / субсчета
+      <button pButton type="button" (click)="refrashAccountSections()" icon="fa-refresh" class="ui-button-secondary table-button"
+        label="Обновить"></button>
+    </p-header>
+
+    <p-column field="sectionNumber" header="Номер раздела"></p-column>
+    <p-column field="sectionType" header="Тип раздела"></p-column>
+    <p-column field="currentBalance" header="Текущий остаток"></p-column>
+    <p-column field="noResponceCb" header="Количество ЦБ, на котрое нет ответа по инструкциям"></p-column>
+    <p-column field="totalAvailableCb" header="Количество ЦБ, доступное для отправки инстркуций"></p-column>
+
+    <p-footerColumnGroup>
+      <p-row>
+        <p-column footer="Итого:" colspan="2"></p-column>
+        <p-column footer={{totalCurrentBalance}}></p-column>
+        <p-column footer={{totalNoResponceCb}}></p-column>
+        <p-column footer={{totalAvailableCb}}></p-column>
+      </p-row>
+    </p-footerColumnGroup>
+
+    <ng-template pTemplate="emptymessage">
+      Нет данных для отображения
+    </ng-template>
+  </p-dataTable>
+</div>
+
+<div class="delimeter"></div>
+
+<!-- Инструкции по счету / субсчкту -->
+<div>
+  <button pButton type="button" (click)="showInstr()" icon="fa-eye" class="ui-button-secondary" title="Просмотреть инструкцию"></button>
+  <button pButton type="button" (click)="addInstr()" icon="fa-plus-square-o" class="ui-button-secondary" title="Добавить инструкцию"></button>
+  <button pButton type="button" (click)="editInstr()" icon="fa-pencil-square-o" class="ui-button-secondary" title="Редактировать инструкцию"></button>
+  <button pButton type="button" (click)="copyInstr()" icon="fa-files-o" class="ui-button-secondary" title="Копировать инструкцию"></button>
+  <button pButton type="button" (click)="sendInstr()" icon="fa-paper-plane" class="ui-button-secondary" title="Отправить инструкцию"></button>
+  <button pButton type="button" (click)="removeInstr()" icon="fa-minus-square-o" class="ui-button-secondary" title="Удалить инструкцию"></button>
+  <button pButton type="button" (click)="cancelInstr()" icon="fa-times" class="ui-button-secondary" title="Отменить инструкцию"></button>
+  <button pButton type="button" (click)="downloadInstr()" icon="fa-download" class="ui-button-secondary" title="Загрузить инструкцию"></button>
+  <button pButton type="button" (click)="uploadInstr()" icon="fa-upload" class="ui-button-secondary" title="Выгрузить инструкцию"></button>
+  <button pButton type="button" (click)="printInstr()" icon="fa-print" class="ui-button-secondary" title="Печать"></button>
+  <button pButton type="button" (click)="updateAllInstr()" icon="fa-refresh" class="ui-button-secondary" title="Обновить"></button>
+</div>
+
+<div>
+  <p-dataTable [value]="instructions" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10" [rowsPerPageOptions]="[5,50,100]" [(selection)]="selectedInstructions" dataKey="id">
+    <p-header>Инструкции по счету / субсчкту</p-header>
+
+    <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+    <p-column field="instrNumber" header="Номер"></p-column>
+    <p-column field="instrStatus" header="Статус"></p-column>
+    <p-column field="instrCreateDate" header="Дата создания"></p-column>
+    <p-column field="instrrejectionReason" header="Причина отказа"></p-column>
+    <p-column field="instrCbCount" header="Количество ЦБ"></p-column>
+    <p-column field="instrStatusMessageNumber" header="Номер сообщения о статусе"></p-column>
+    <p-column field="instrStatusMessageDat" header="Дата сообщения о статусе"></p-column>
+    <p-column field="instrSender" header="Отправитель"></p-column>
+    <p-column field="instrReceiver" header="Получатель"></p-column>
+    <p-column field="instrDateSent" header="Дата отправки"></p-column>
+
+    <ng-template pTemplate="emptymessage">
+      Нет данных для отображения
+    </ng-template>
+
+    <!-- <p-footer> -->
+        <!-- <ul> -->
+            <!-- <li *ngFor="let instr of selectedInstructions" style="text-align: left">{{instr.id}}</li> -->
+        <!-- </ul> -->
+    <!-- </p-footer> -->
+  </p-dataTable>
+</div>
+
+<div class="delimeter"></div>

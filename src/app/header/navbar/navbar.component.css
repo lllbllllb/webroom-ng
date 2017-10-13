@@ -1,0 +1,50 @@
+/* https://github.com/primefaces/primeng/issues/558 */
+:host /deep/ .ui-corner-all {
+          border-radius: 0;
+}
+
+:host /deep/ .ui-menu {
+          border:  rgb(68, 56, 56);
+          padding: 8px;
+}
+
+:host /deep/ .ui-menubar {
+          background-color: rgb(68, 56, 56);
+          width: 100%;
+          padding: 0;
+          height: 30px;
+}
+
+:host /deep/ .ui-menu-list {
+          background-color: rgb(68, 56, 56);
+          width: 100%;
+          height: 30px;
+          padding: 0;
+}
+
+:host /deep/ .ui-menu-list:hover {
+          background-color: rgb(68, 56, 56);
+}
+
+:host /deep/ .ui-menuitem {
+          margin: 0;
+          background-color:  rgb(68, 56, 56);
+          
+}
+:host /deep/ .ui-menuitem:hover {
+          background-color: rgb(110, 91, 91);          
+}
+
+:host /deep/ .ui-menuitem-text {
+          color: white;
+}
+
+:host /deep/ .ui-submenu-icon {
+          color: white;
+}
+
+:host /deep/ .ui-menuitem-link {
+          padding: .5em;
+}
+
+/* ui-menu-list ui-widget-content ui-corner-all ui-helper-clearfix ui-menu-child ui-shadow */

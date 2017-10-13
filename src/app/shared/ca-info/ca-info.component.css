@@ -1,0 +1,14 @@
+.line {
+          height: 3em;
+}
+
+.text-to-down {
+         margin-top: 5px;
+}
+
+:host /deep/ .ui-inputtext {
+          color: black;
+          background: none;
+          opacity: 1;
+          width: 100%;
+}

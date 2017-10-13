@@ -1,0 +1,60 @@
+<div class="header-container">
+  <div class="main-height">
+    <div class="ui-g">
+
+      <div class="ui-g-3">
+        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/5/5e/NSD_logo.jpg/640px-NSD_logo.jpg" alt="nsd.logo" space="10px"
+          width="320">
+      </div>
+
+      <div class="ui-g-6">
+        <div class="header-text-style">
+          <div>
+            <label>Организация: </label>{{person}}
+          </div>
+          <div>
+            <label>Роль организации: </label>{{personRole}}
+          </div>
+          <div>
+            <label>Ф.И.О: </label>{{userSurname}}
+          </div>
+          <div>
+            <label>Роли: </label>{{userRole}}
+          </div>
+        </div>
+      </div>
+
+      <div class="ui-g-3">
+        <div class="header-text-style">
+          <div>
+            <label>Написать предложение по улучшению: </label>
+            <a href="mailto:managed@nsd.ru">managed@nsd.ru</a>
+          </div>
+          <div>
+            <label>Сообщить о проеблеме в работе системы: </label>
+            <a href="mailto:soed@nsd.ru">soed@nsd.ru</a>
+          </div>
+
+          <span style='padding:5px;'> </span>
+
+          <div>
+            <button pButton type="button" (click)="showVersionDialog()" label="Версия" class="ui-button-secondary"></button>
+            <span style='padding-left:30%;'> </span>
+            <button pButton type="button" (click)="showVersionDialog()" label="Выход" class="ui-button-secondary"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-navbar></app-navbar>
+
+  <app-breadcrumb></app-breadcrumb>
+</div>
+
+
+<p-dialog header="Версия" [(visible)]="displayVersionDialog">
+  Версия Кабинета: 0.0.1 alpha
+  <br/>
+  <br/> Версия Ядра: нет ядра
+</p-dialog>

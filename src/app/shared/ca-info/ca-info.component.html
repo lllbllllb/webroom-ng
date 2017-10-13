@@ -1,0 +1,81 @@
+<p-panel header="Информация" [toggleable]="true">
+
+    <div class="ui-g">
+        <div class="ui-g-6 text-to-down">
+            <div class="line">
+                <span id="text">Референс КД:</span>
+            </div>
+
+            <div class="line">
+                <span id="text">Доступ к КД:</span>
+            </div>
+
+            <div class="line">
+                <span id="text">Тип КД:</span>
+            </div>
+
+            <div class="line">
+                <span id="text">Статус КД:</span>
+            </div>
+
+            <div class="line">
+                <span id="text">Дата проведения</span>
+            </div>
+
+            <div class="line">
+                <span id="text">Дата фиксации:</span>
+            </div>
+
+            <div class="line">
+                <span id="text">Дата окончания приема инструкций:</span>
+            </div>
+
+            <div class="line">
+                <span id="text">Эмитент: </span>
+            </div>
+
+            <div class="line">
+                <span id="text">ISIN ЦБ:</span>
+            </div>
+
+            <div class="line">
+                <span id="text">Информация обновлена:</span>
+            </div>
+        </div>
+
+        <div class="ui-g-6">
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="reference" [disabled]=true>
+            </div>
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="orgAccessCode" [disabled]=true>
+            </div>
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="caType" [disabled]=true>
+            </div>
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="caStatus" [disabled]=true>
+            </div>
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="datePrvd" [disabled]=true>
+            </div>
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="dateFix" [disabled]=true>
+            </div>
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="datePrdEnd" [disabled]=true>
+            </div>
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="emitent" [disabled]=true>
+            </div>
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="isin" [disabled]=true>
+            </div>
+            <div class="line">
+                <input id="input" type="text" size="30" pInputText [ngModel]="updated" [disabled]=true>
+            </div>
+        </div>
+    </div>
+
+
+</p-panel>

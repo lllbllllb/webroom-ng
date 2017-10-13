@@ -1,0 +1,32 @@
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <div id="side-content">
+      <app-ca-info></app-ca-info>
+    </div>
+  </mat-sidenav>
+
+  <div class="container">
+
+    <button pButton type="button" (click)="sidenav.toggle()" class="toggle-button"></button>
+
+    <div id="main-content">
+      <div id='window-header'>
+        Параметры корпоративного действия
+      </div>
+
+      <p-tabView>
+        <p-tabPanel header="Общие данные">
+          Тут долна быть печатная форма, но её нет. Смотрите вторую вкладку.
+        </p-tabPanel>
+        <p-tabPanel header="Собственные ЦБ">
+          <app-own-cb></app-own-cb>
+        </p-tabPanel>
+        <p-tabPanel header="Сообщения">
+          Content 2
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+
+</mat-sidenav-container>

@@ -1,0 +1,15 @@
+
+.header-text-style {
+          font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+          font-size: 1em; 
+}
+
+:host /deep/ .ui-dialog-title {
+          font-size: small !important;
+          font-weight: bold;
+          padding: 0;
+}
+
+.main-height {
+          height: 110px;
+}

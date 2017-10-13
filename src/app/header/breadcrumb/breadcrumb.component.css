@@ -1,0 +1,11 @@
+:host /deep/ .ui-breadcrumb {
+          background: none;
+          border: none;
+          height: 23px;
+}
+
+.header-buttom-border {
+          border-bottom: 5px;
+          border-bottom-color: rgb(68, 56, 56);
+          border-bottom-style: solid;
+}
