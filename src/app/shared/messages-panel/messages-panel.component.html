@@ -1,0 +1,15 @@
+<p-panel header="Сообщения" [toggleable]="true">
+
+  <div id="warning-message" *ngIf="isWarning">
+    <p>
+      {{messageText}}
+    </p>
+  </div>
+
+  <div *ngIf="!isWarning">
+    <p>
+      {{messageText}}
+    </p>
+  </div>
+
+</p-panel>

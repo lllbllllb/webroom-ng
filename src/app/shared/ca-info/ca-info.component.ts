@@ -14,8 +14,8 @@ export class CaInfoComponent implements OnInit {
   datePrvd = '';
   dateFix = '';
   datePrdEnd = '10.10.2100';
-  emitent = '';
-  isin = 'RU0909090090РА';
+  emitent = 'PRIME (LA)';
+  isin = 'US0909090090РА';
   updated = '10.10.2017 14:45';
 
   constructor() { }

@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  person = 'noname test person very-very long noname test person very-very long noname test person very-very long';
+  person = 'Группа компаний "EGAR Technology". Белорусское подразделение "EGAR Technology Bel"';
   personRole = 'Депонент';
   userSurname = 'Иванов И.И.';
   userRole = 'Дупонент_Верификация и отправка';

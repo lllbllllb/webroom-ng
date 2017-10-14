@@ -12,3 +12,7 @@
           opacity: 1;
           width: 100%;
 }
+
+:host /deep/ .ui-panel-title {
+          font-weight: bolder;
+}

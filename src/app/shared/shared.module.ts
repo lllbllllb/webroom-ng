@@ -2,26 +2,31 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { CaInfoComponent } from './ca-info/ca-info.component';
-
 // primeng
-import { PanelModule } from 'primeng/primeng';
-import { InputTextModule } from 'primeng/primeng';
+import { PanelModule, ButtonModule, InputTextModule } from 'primeng/primeng';
 
+import { MessagesPanelComponent } from './messages-panel/messages-panel.component';
+import { CaInfoComponent } from './ca-info/ca-info.component';
+import { ActionsPanelComponent } from './actions-panel/actions-panel.component';
 
 @NgModule({
 
   declarations: [
-    CaInfoComponent
-  ],
+    CaInfoComponent,
+    ActionsPanelComponent,
+    MessagesPanelComponent
+],
   imports: [
     CommonModule,
     PanelModule,
     InputTextModule,
-    FormsModule
+    FormsModule,
+    ButtonModule
   ],
   exports: [
-    CaInfoComponent
+    CaInfoComponent,
+    ActionsPanelComponent,
+    MessagesPanelComponent
   ]
 })
 export class SharedModule { }

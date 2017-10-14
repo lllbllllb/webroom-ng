@@ -17,12 +17,10 @@ export class EventKeeperBoxService {
           }
 
           getBreadCrumbsItems(): BehaviorSubject<MenuItem[]> {
-                    this.logger.info('2: get');
                     return this.breadcrumbChange;
           }
 
           setBreadcrumbsItems(breadcrumbs: MenuItem[]) {
-                    this.logger.info('1: set');
                     this.breadcrumbChange.next(breadcrumbs);
           }
 }

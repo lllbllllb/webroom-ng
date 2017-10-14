@@ -8,12 +8,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
+// Imports for loading & configuring the in-memory web api
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+
 import { AppComponent } from './app.component';
 import { CaParamsComponent } from './ca-params/ca-params.component';
 import { HeaderComponent } from './header/header.component';
 
 // primeng
-import { MenuItem, TabViewModule, DialogModule, ButtonModule} from 'primeng/primeng';
+import { MenuItem, TabViewModule, DialogModule, ButtonModule } from 'primeng/primeng';
 
 // angular.material
 import { MatSidenavModule } from '@angular/material';
@@ -35,7 +39,8 @@ import { MatSidenavModule } from '@angular/material';
     MatSidenavModule,
     TabViewModule,
     HeaderModule,
-    CaParamsModule
+    CaParamsModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   providers: [],
   bootstrap: [AppComponent]

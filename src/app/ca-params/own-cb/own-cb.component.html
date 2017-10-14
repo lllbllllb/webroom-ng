@@ -6,9 +6,10 @@
 </div>
 
 <div>
-  <p-dataTable [value]="accounts" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10" [rowsPerPageOptions]="[5,50,100]">
+  <p-dataTable [value]="accounts" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10" [rowsPerPageOptions]="[10,50,100]"
+    selectionMode="single" [(selection)]="selectedAccount" (onRowSelect)="accountOnRowSelect($event)" dataKey="id">
     <p-header>Счета / субсчета</p-header>
-    
+
     <p-column field="accountNumber" header="Номер счета / субсчета"></p-column>
     <p-column field="accountType" header="Тип счета / субсчета"></p-column>
     <p-column field="storage" header="Место хранения"></p-column>
@@ -28,10 +29,25 @@
 <!-- Разделы счета / субсчета -->
 <div>
   <p-dataTable [value]="accountSections" [responsive]="true">
-    <p-header>Разделы счета / субсчета
-      <button pButton type="button" (click)="refrashAccountSections()" icon="fa-refresh" class="ui-button-secondary table-button"
-        label="Обновить"></button>
+    <p-header>
+
+      <div class="ui-g">
+        <div class="ui-g-4 toleft">
+          Обновление информации: {{accountSectionsLastUpdateTime}}
+        </div>
+
+        <div class="ui-g-4">
+          Разделы счета / субсчета
+        </div>
+
+        <div class="ui-g-4 toright">
+          <button pButton type="button" (click)="refrashAccountSections()" icon="fa-refresh" class="ui-button-secondary table-button"
+            label="Обновить"></button>
+        </div>
+      </div>
+
     </p-header>
+
 
     <p-column field="sectionNumber" header="Номер раздела"></p-column>
     <p-column field="sectionType" header="Тип раздела"></p-column>
@@ -58,43 +74,53 @@
 
 <!-- Инструкции по счету / субсчкту -->
 <div>
-  <button pButton type="button" (click)="showInstr()" icon="fa-eye" class="ui-button-secondary" title="Просмотреть инструкцию"></button>
-  <button pButton type="button" (click)="addInstr()" icon="fa-plus-square-o" class="ui-button-secondary" title="Добавить инструкцию"></button>
-  <button pButton type="button" (click)="editInstr()" icon="fa-pencil-square-o" class="ui-button-secondary" title="Редактировать инструкцию"></button>
-  <button pButton type="button" (click)="copyInstr()" icon="fa-files-o" class="ui-button-secondary" title="Копировать инструкцию"></button>
-  <button pButton type="button" (click)="sendInstr()" icon="fa-paper-plane" class="ui-button-secondary" title="Отправить инструкцию"></button>
-  <button pButton type="button" (click)="removeInstr()" icon="fa-minus-square-o" class="ui-button-secondary" title="Удалить инструкцию"></button>
-  <button pButton type="button" (click)="cancelInstr()" icon="fa-times" class="ui-button-secondary" title="Отменить инструкцию"></button>
-  <button pButton type="button" (click)="downloadInstr()" icon="fa-download" class="ui-button-secondary" title="Загрузить инструкцию"></button>
-  <button pButton type="button" (click)="uploadInstr()" icon="fa-upload" class="ui-button-secondary" title="Выгрузить инструкцию"></button>
-  <button pButton type="button" (click)="printInstr()" icon="fa-print" class="ui-button-secondary" title="Печать"></button>
-  <button pButton type="button" (click)="updateAllInstr()" icon="fa-refresh" class="ui-button-secondary" title="Обновить"></button>
+  <button pButton type="button" (click)="showInstr()" icon="fa-eye" class="ui-button-secondary" title="Просмотреть инструкцию"
+    [disabled]="!selectedInstructions||selectedInstructions.length!==1"></button>
+  <button pButton type="button" (click)="addInstr()" icon="fa-plus-square-o" class="ui-button-secondary" title="Добавить инструкцию"
+    [disabled]="!selectedInstructions?false:selectedInstructions.length!==0"></button>
+  <button pButton type="button" (click)="copyInstr()" icon="fa-files-o" class="ui-button-secondary" title="Копировать инструкцию"
+    [disabled]="!selectedInstructions||selectedInstructions.length!==1"></button>
+  <button pButton type="button" (click)="editInstr()" icon="fa-pencil-square-o" class="ui-button-secondary" title="Редактировать инструкцию"
+    [disabled]="editInstrDisable()"></button>
+  <button pButton type="button" (click)="removeInstr()" icon="fa-minus-square-o" class="ui-button-secondary" title="Удалить инструкцию"
+    [disabled]="selectedInstructions?selectedInstructions.length<1:true"></button>
+  <button pButton type="button" (click)="sendInstr()" icon="fa-paper-plane" class="ui-button-secondary" title="Отправить инструкцию"
+    [disabled]="sendInstrDisable()"></button>
+  <button pButton type="button" (click)="cancelInstr()" icon="fa-times" class="ui-button-secondary" title="Отменить инструкцию"
+    [disabled]="canselInstrDisable()"></button>
+  <button pButton type="button" (click)="downloadInstr()" icon="fa-download" class="ui-button-secondary" title="Загрузить инструкцию"
+    [disabled]="!selectedInstructions?false:selectedInstructions.length!==0"></button>
+  <button pButton type="button" (click)="uploadInstr()" icon="fa-upload" class="ui-button-secondary" title="Выгрузить инструкцию"
+    [disabled]="!selectedInstructions||selectedInstructions.length!==1"></button>
+  <button pButton type="button" (click)="printInstr()" icon="fa-print" class="ui-button-secondary" title="Печать" [disabled]="!selectedInstructions||selectedInstructions.length!==1"></button>
+  <button pButton type="button" (click)="updateAllInstr()" icon="fa-refresh" class="ui-button-secondary" title="Обновить" [disabled]="true"></button>
 </div>
 
 <div>
-  <p-dataTable [value]="instructions" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10" [rowsPerPageOptions]="[5,50,100]" [(selection)]="selectedInstructions" dataKey="id">
+  <p-dataTable [value]="instructions" selectionMode="multiple" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10"
+    [rowsPerPageOptions]="[10,50,100]" [(selection)]="selectedInstructions" dataKey="id">
     <p-header>Инструкции по счету / субсчкту</p-header>
 
     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
     <p-column field="instrNumber" header="Номер"></p-column>
-    <p-column field="instrStatus" header="Статус"></p-column>
-    <p-column field="instrCreateDate" header="Дата создания"></p-column>
-    <p-column field="instrrejectionReason" header="Причина отказа"></p-column>
-    <p-column field="instrCbCount" header="Количество ЦБ"></p-column>
-    <p-column field="instrStatusMessageNumber" header="Номер сообщения о статусе"></p-column>
-    <p-column field="instrStatusMessageDat" header="Дата сообщения о статусе"></p-column>
-    <p-column field="instrSender" header="Отправитель"></p-column>
-    <p-column field="instrReceiver" header="Получатель"></p-column>
-    <p-column field="instrDateSent" header="Дата отправки"></p-column>
+    <p-column field="instrStatus" header="Статус" [style]="{'overflow':'hidden'}"></p-column>
+    <p-column field="instrCreateDate" header="Дата создания" [style]="{'overflow':'hidden'}"></p-column>
+    <p-column field="instrrejectionReason" header="Причина отказа" [style]="{'overflow':'hidden'}"></p-column>
+    <p-column field="instrCbCount" header="Количество ЦБ" [style]="{'overflow':'hidden'}"></p-column>
+    <p-column field="instrStatusMessageNumber" header="Номер сообщения о статусе" [style]="{'overflow':'hidden'}"></p-column>
+    <p-column field="instrStatusMessageDat" header="Дата сообщения о статусе" [style]="{'overflow':'hidden'}"></p-column>
+    <p-column field="instrSender" header="Отправитель" [style]="{'overflow':'hidden'}"></p-column>
+    <p-column field="instrReceiver" header="Получатель" [style]="{'overflow':'hidden'}"></p-column>
+    <p-column field="instrDateSent" header="Дата отправки" [style]="{'overflow':'hidden'}"></p-column>
 
     <ng-template pTemplate="emptymessage">
       Нет данных для отображения
     </ng-template>
 
     <!-- <p-footer> -->
-        <!-- <ul> -->
-            <!-- <li *ngFor="let instr of selectedInstructions" style="text-align: left">{{instr.id}}</li> -->
-        <!-- </ul> -->
+    <!-- <ul> -->
+    <!-- <li *ngFor="let instr of selectedInstructions" style="text-align: left">{{instr.id}}</li> -->
+    <!-- </ul> -->
     <!-- </p-footer> -->
   </p-dataTable>
 </div>

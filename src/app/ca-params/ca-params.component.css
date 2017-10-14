@@ -7,6 +7,10 @@ material-app, mat-sidenav-container {
   height: 100%;
 }
 
+:host /deep/ .ui-tabview-title {
+  font-weight: bolder;
+}
+
 .container {
   overflow: auto;
 }
@@ -27,7 +31,7 @@ material-app, mat-sidenav-container {
           margin-right: 5px;
 }
 
-#side-content {
+.side-content {
           margin-top:10px;
           margin-left:5px;
           margin-right: 5px;

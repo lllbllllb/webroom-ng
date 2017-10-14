@@ -1,0 +1,7 @@
+#warning-message {
+          color: red;
+}
+
+:host /deep/ .ui-panel-title {
+          font-weight: bolder;
+}
