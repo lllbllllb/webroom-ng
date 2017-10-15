@@ -1,4 +1,4 @@
-/* :host /deep/ .ui-datatable-header {
+:host /deep/ .ui-datatable-header {
           font-weight: bolder;
 }
 
@@ -31,4 +31,4 @@
 
 toright {
           text-align: right;
-} */
+}
