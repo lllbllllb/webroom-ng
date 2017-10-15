@@ -22,8 +22,8 @@ export class CaParamsComponent implements OnInit {
   fireCurrentBreadCrumbs() {
     this.breadCrumbsItems = [];
     this.breadCrumbsItems[0] = ({ label: 'Web-кабинет' });
-    this.breadCrumbsItems[1] = ({ label: 'Корпоративные действия' });
-    this.breadCrumbsItems[2] = ({ label: 'Параметры Корпоративного действия' });
+    this.breadCrumbsItems[1] = ({ label: 'Корпоративные действия', routerLink: ['cas']  });
+    this.breadCrumbsItems[2] = ({ label: 'Параметры Корпоративного действия'});
 
     this.eventKeeperBox.setBreadcrumbsItems(this.breadCrumbsItems);
   }

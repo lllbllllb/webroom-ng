@@ -83,7 +83,7 @@
   <button pButton type="button" (click)="editInstr()" icon="fa-pencil-square-o" class="ui-button-secondary" title="Редактировать инструкцию"
     [disabled]="editInstrDisable()"></button>
   <button pButton type="button" (click)="removeInstr()" icon="fa-minus-square-o" class="ui-button-secondary" title="Удалить инструкцию"
-    [disabled]="selectedInstructions?selectedInstructions.length<1:true"></button>
+    [disabled]="removeInstrDisable()"></button>
   <button pButton type="button" (click)="sendInstr()" icon="fa-paper-plane" class="ui-button-secondary" title="Отправить инструкцию"
     [disabled]="sendInstrDisable()"></button>
   <button pButton type="button" (click)="cancelInstr()" icon="fa-times" class="ui-button-secondary" title="Отменить инструкцию"

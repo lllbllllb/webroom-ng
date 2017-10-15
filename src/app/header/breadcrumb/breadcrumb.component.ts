@@ -14,12 +14,12 @@ export class BreadcrumbComponent implements OnInit {
   private breadCrumbsItems: MenuItem[];
 
   constructor(private eventKeeperBox: EventKeeperBoxService,
-  private logger: Logger) { }
+    private logger: Logger) { }
 
   ngOnInit() {
     if (this.eventKeeperBox.getBreadCrumbsItems() != null) {
       this.eventKeeperBox.getBreadCrumbsItems()
-      .subscribe(items => this.breadCrumbsItems = items);
+        .subscribe(items => this.breadCrumbsItems = items);
     } else {
       this.logger.error('Breadcrombs not load yet!');
     }

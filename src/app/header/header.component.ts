@@ -25,4 +25,8 @@ export class HeaderComponent implements OnInit {
   showVersionDialog() {
     this.displayVersionDialog = true;
   }
+
+  exit() {
+    this.eventKeeperBox.setShowLogin(true);
+  }
 }

@@ -1,15 +1,21 @@
+import { CasComponent } from './cas/cas.component';
 import { CaParamsComponent } from './ca-params/ca-params.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'caParams', pathMatch: 'full' },
-  { path: 'caParams', component: CaParamsComponent }
-  // { path: 'crisis-center', component: CrisisListComponent },
-  // { path: 'heroes',        component: HeroListComponent },
-  // { path: '',   redirectTo: '/heroes', pathMatch: 'full' },
-  // { path: '**', component: PageNotFoundComponent }
+  { path: '', redirectTo: 'corpactions', pathMatch: 'full' },
+  {
+    path: 'corpactions', children:
+      [
+        { path: '', redirectTo: 'cas', pathMatch: 'full' },
+        { path: 'cas', component: CasComponent },
+        { path: 'caParams', component: CaParamsComponent },
+        { path: '**', redirectTo: 'cas', pathMatch: 'full' }
+      ]
+    },
+    { path: '**', redirectTo: 'corpactions', pathMatch: 'full' }
 ];
 
 @NgModule({

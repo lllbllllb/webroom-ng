@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { EventKeeperBoxService } from './../../core/event-keeper-box.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActionsPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventKeeperBox: EventKeeperBoxService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -16,5 +18,7 @@ export class ActionsPanelComponent implements OnInit {
 
   actionsPahelShowHistory() { }
 
-  actionsPanelBack() { }
+  actionsPanelBack() {
+    this.eventKeeperBox.goBack();
+  }
 }

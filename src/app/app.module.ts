@@ -18,16 +18,21 @@ import { HeaderComponent } from './header/header.component';
 
 // primeng
 import { MenuItem, TabViewModule, DialogModule, ButtonModule } from 'primeng/primeng';
+import {SidebarModule} from 'primeng/components/sidebar/sidebar'; // https://forum.primefaces.org/viewtopic.php?t=52766
 
 // angular.material
 import { MatSidenavModule } from '@angular/material';
+import { CasComponent } from './cas/cas.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CaParamsComponent,
-    HeaderComponent
-  ],
+    HeaderComponent,
+    CasComponent,
+    LoginComponent
+],
   imports: [
     BrowserModule,
     SharedModule,
@@ -40,6 +45,7 @@ import { MatSidenavModule } from '@angular/material';
     TabViewModule,
     HeaderModule,
     CaParamsModule,
+    SidebarModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService)
   ],
   providers: [],

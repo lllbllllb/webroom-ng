@@ -5,6 +5,7 @@ import { AccountSection } from './entities/account-section';
 import { AccountCb } from './entities/account-cb';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-own-cb',
@@ -12,6 +13,8 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./own-cb.component.css']
 })
 export class OwnCbComponent implements OnInit {
+
+  private headers = new Headers({ 'Content-Type': 'application/json' });
 
   accounts: AccountCb[];
   selectedAccount: AccountCb;
@@ -60,7 +63,23 @@ export class OwnCbComponent implements OnInit {
 
   editAccount() { }
 
-  removeAccount() { }
+  removeAccount() {
+    // const api_path = '/api/accounts/' + this.selectedAccount.id;
+
+    // this.http.delete<AccountCb[]>(api_path)
+    // .subscribe(accounts => {
+    //   this.logger.info('!!!');
+    //   this.accounts = accounts;
+    //   this.selectedAccount = this.accounts[0];
+    // });
+
+    // this.http.get<AccountCb[]>('/api/ownCbAccounts')
+    //   .subscribe(accounts => {
+    //     this.accounts = accounts;
+    //     this.selectedAccount = this.accounts[0];
+    //   });
+
+  }
 
   refrashAccountSections() {
     this.http.get<AccountSection[]>('/api/ownAccountSections')
@@ -87,7 +106,15 @@ export class OwnCbComponent implements OnInit {
 
   sendInstr() { }
 
-  removeInstr() { }
+  removeInstr() {
+    // for (const i of this.selectedInstructions) {
+    //   if (this.instructions.indexOf(i) !== -1) {
+    //     this.instructions.splice(this.instructions.indexOf(i), 1);
+    //   }
+    // }
+
+    // this.logger.info('' + this.instructions.length);
+  }
 
   cancelInstr() { }
 
@@ -110,6 +137,19 @@ export class OwnCbComponent implements OnInit {
       });
   }
 
+  removeInstrDisable() {
+    if (this.selectedInstructions && this.selectedInstructions.length !== 0) {
+      for (const i of this.selectedInstructions) {
+        if (i.instrStatus !== 'Черновик' && i.instrStatus !== 'К отправке') {
+          return true;
+        }
+      }
+    } else {
+      return true;
+    }
+    return false;
+  }
+
   editInstrDisable() {
     if (this.selectedInstructions && this.selectedInstructions.length === 1) {
       return this.selectedInstructions[0].instrStatus !== 'Черновик' && this.selectedInstructions[0].instrStatus !== 'К отправке';
@@ -118,7 +158,7 @@ export class OwnCbComponent implements OnInit {
     }
   }
 
-  canselInstrDisable(event) {
+  canselInstrDisable() {
 
     const canselInstrEnableSts = [
       'Отправлено',
