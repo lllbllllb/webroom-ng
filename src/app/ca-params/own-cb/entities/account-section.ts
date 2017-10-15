@@ -5,4 +5,5 @@ export interface AccountSection {
           currentBalance: number;
           noResponceCb: number;
           totalAvailableCb: number;
+          accountId: number;
 }

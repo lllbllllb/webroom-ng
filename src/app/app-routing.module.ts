@@ -1,3 +1,5 @@
+import { LoginComponent } from './login/login.component';
+import { AuthGuardService } from './core/auth-guard.service';
 import { CasComponent } from './cas/cas.component';
 import { CaParamsComponent } from './ca-params/ca-params.component';
 import { NgModule } from '@angular/core';
@@ -9,9 +11,10 @@ const appRoutes: Routes = [
   {
     path: 'corpactions', children:
       [
-        { path: '', redirectTo: 'cas', pathMatch: 'full' },
-        { path: 'cas', component: CasComponent },
-        { path: 'caParams', component: CaParamsComponent },
+        { path: '', redirectTo: 'login', pathMatch: 'full' },
+        { path: 'login', component: LoginComponent },
+        { path: 'cas', component: CasComponent, canActivate: [AuthGuardService] },
+        { path: 'caParams', component: CaParamsComponent, canActivate: [AuthGuardService] },
         { path: '**', redirectTo: 'cas', pathMatch: 'full' }
       ]
     },

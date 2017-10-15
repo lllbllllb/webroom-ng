@@ -1,3 +1,4 @@
+import { Ca } from './../shared/entities/ca';
 import { Router } from '@angular/router';
 import { CoreModule } from './core.module';
 import { Logger } from './logger.service';
@@ -11,14 +12,12 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class EventKeeperBoxService {
 
-          breadcrumbChange: BehaviorSubject<MenuItem[]>;
+          breadcrumbChange: BehaviorSubject<MenuItem[]> = new BehaviorSubject(null);
           currentPosition: MenuItem[] = [];
-          showLogin: BehaviorSubject<boolean>;
+          currentCa: BehaviorSubject<Ca> = new BehaviorSubject(null);
 
           constructor(private logger: Logger,
                     private router: Router) {
-                    this.breadcrumbChange = new BehaviorSubject(null);
-                    this.showLogin = new BehaviorSubject(false);
           }
 
           getBreadCrumbsItems(): BehaviorSubject<MenuItem[]> {
@@ -30,16 +29,16 @@ export class EventKeeperBoxService {
                     this.currentPosition = breadcrumbs;
           }
 
+          getCa(): BehaviorSubject<Ca> {
+                    return this.currentCa;
+          }
+
+          setCa(ca: Ca) {
+                    this.currentCa.next(ca);
+          }
+
           goBack() {
                     const a = this.currentPosition[this.currentPosition.length - 2].routerLink;
                     this.router.navigate(a);
-          }
-
-          isShowLogin(): BehaviorSubject<boolean> {
-                    return this.showLogin;
-          }
-
-          setShowLogin(showLogin: boolean) {
-                    this.showLogin.next(showLogin);
           }
 }

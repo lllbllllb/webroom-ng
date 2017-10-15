@@ -1,3 +1,6 @@
+import { AuthService } from './auth.service';
+import { CanActivate } from '@angular/router';
+import { AuthGuardService } from './auth-guard.service';
 import { OwnCbDataServiceService } from './own-cb-data-service.service';
 import { EventKeeperBoxService } from './event-keeper-box.service';
 import { Logger } from './logger.service';
@@ -18,7 +21,9 @@ import {HttpClientModule} from '@angular/common/http';
   providers: [
     Logger,
     EventKeeperBoxService,
-    OwnCbDataServiceService
+    OwnCbDataServiceService,
+    AuthGuardService,
+    AuthService
   ]
 })
 export class CoreModule {

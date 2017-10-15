@@ -1,3 +1,5 @@
+import { Ca } from './shared/entities/ca';
+import { User } from './shared/entities/user';
 import { AccountSection } from './ca-params/own-cb/entities/account-section';
 import { Instruction } from './ca-params/own-cb/entities/instruction';
 import { AccountCb } from './ca-params/own-cb/entities/account-cb';
@@ -8,7 +10,59 @@ export class InMemoryDataService implements InMemoryDbService {
 
   private randomizeOwnCbinstructions: Instruction[];
 
+  private caStatusses: string[] = [
+    'Объявлено КД',
+    'Прием инструкций',
+    'Объявлено КД (без подачи инструкции)Не требуется инструкция',
+    'Прием инструкций завершен',
+    'Подведены итоги',
+    'Завершено',
+    'Отменено',
+    'Не исполнены обязательства по оплате',
+    'Не состоялось'
+  ];
+
+  private messageStatusses: string[] = [
+    'Черновик',
+    'К отправке',
+    'Отправлено',
+    'Принято к обработке в НРД',
+    'Ошибка при обработке в НРД',
+    'Принято НРД',
+    'Принято регистратором/вышестоящим депозитарием',
+    'Отказано НРД',
+    'Отказано регистратором/вышестоящим депозитарием',
+    'Исполнено',
+    'Отменено'
+  ];
+
+  private caType: string[] = [
+    'BIDS',
+    'TEND',
+    'MEET',
+    'BMET',
+    'OMET',
+    'GMET',
+    'BPUT',
+    'PRIO'
+  ];
+
+  private caCompType: string[] = [
+    'MAND',
+    'VOLU'
+  ];
+
   createDb() {
+
+    const mockCredentials: User[] = [
+      {
+        id: 0,
+        username: 'egar',
+        password: 'egar',
+        name: 'Egor',
+        role: 'ADMIN'
+      }
+    ];
 
     const ownCbAccounts: AccountCb[] = [
       {
@@ -25,18 +79,47 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 0,
         sectionNumber: '0000000',
-        sectionType: 'Первый',
+        sectionType: 'Банковский',
         currentBalance: Math.floor((Math.random() + 1) * 500),
         noResponceCb: Math.floor((Math.random() + 1) * 500),
         totalAvailableCb: Math.floor((Math.random() + 1) * 500),
+        accountId: 0
       },
       {
         id: 1,
         sectionNumber: '00000001',
-        sectionType: 'Второй',
+        sectionType: 'Стартап',
         currentBalance: Math.floor((Math.random() + 1) * 500),
         noResponceCb: Math.floor((Math.random() + 1) * 500),
         totalAvailableCb: Math.floor((Math.random() + 1) * 500),
+        accountId: 0
+      },
+      {
+        id: 2,
+        sectionNumber: '0000002',
+        sectionType: 'Крипровалюта',
+        currentBalance: Math.floor((Math.random() + 1) * 500),
+        noResponceCb: Math.floor((Math.random() + 1) * 500),
+        totalAvailableCb: Math.floor((Math.random() + 1) * 500),
+        accountId: 0
+      },
+      {
+        id: 3,
+        sectionNumber: '00000000',
+        sectionType: 'Крипровалюта',
+        currentBalance: Math.floor((Math.random() + 1) * 500),
+        noResponceCb: Math.floor((Math.random() + 1) * 500),
+        totalAvailableCb: Math.floor((Math.random() + 1) * 500),
+        accountId: 1
+      },
+      {
+        id: 4,
+        sectionNumber: '0000001',
+        sectionType: 'Акции',
+        currentBalance: Math.floor((Math.random() + 1) * 500),
+        noResponceCb: Math.floor((Math.random() + 1) * 500),
+        totalAvailableCb: Math.floor((Math.random() + 1) * 500),
+        accountId: 1
       }
     ];
 
@@ -46,7 +129,7 @@ export class InMemoryDataService implements InMemoryDbService {
         {
           id: i,
           instrNumber: JSON.stringify(100000 + i),
-          instrStatus: this.generateMessageStatus(),
+          instrStatus: this.generatefromGiven(this.messageStatusses),
           instrCreateDate: new Date().toLocaleString('ru-RU'),
           instrrejectionReason: this.generateString(),
           instrCbCount: Math.floor((Math.random() + 1) * 500),
@@ -62,8 +145,9 @@ export class InMemoryDataService implements InMemoryDbService {
     for (let i = 0; i < 6; i++) {
       ownCbinstructions_1.push(
         {
-          id: i, instrNumber: JSON.stringify(100000 + i),
-          instrStatus: this.generateMessageStatus(),
+          id: i,
+          instrNumber: JSON.stringify(100000 + i),
+          instrStatus: this.generatefromGiven(this.messageStatusses),
           instrCreateDate: new Date().toLocaleString('ru-RU'),
           instrrejectionReason: this.generateString(),
           instrCbCount: Math.floor(Math.random() * 5 + 1),
@@ -75,7 +159,28 @@ export class InMemoryDataService implements InMemoryDbService {
         });
     }
 
-    return { ownCbAccounts, ownCbinstructions_0, ownCbinstructions_1, ownAccountSections };
+    const cas: Ca[] = [];
+    for (let i = 0; i < 100; i++) {
+      cas.push(
+        {
+          id: i,
+          reference: this.generateString(),
+          type: this.generatefromGiven(this.caType),
+          compType: this.generatefromGiven(this.caCompType),
+          status: this.generatefromGiven(this.caStatusses),
+          fixDate: new Date().toLocaleString('ru-RU'),
+          dateStart: new Date().toLocaleString('ru-RU'),
+          dateEnd: new Date().toLocaleString('ru-RU'),
+          isin: this.generateString(),
+          grn: this.generateString(),
+          code: this.generateString(),
+          registrator: this.generateString(),
+          emitent: this.generateString()
+        }
+      );
+    }
+
+    return { ownCbAccounts, ownCbinstructions_0, ownCbinstructions_1, ownAccountSections, mockCredentials, cas };
   }
 
   generateString() {
@@ -90,21 +195,7 @@ export class InMemoryDataService implements InMemoryDbService {
     return text;
   }
 
-  generateMessageStatus() {
-    const possible = [
-      'Черновик',
-      'К отправке',
-      'Отправлено',
-      'Принято к обработке в НРД',
-      'Ошибка при обработке в НРД',
-      'Принято НРД',
-      'Принято регистратором/вышестоящим депозитарием',
-      'Отказано НРД',
-      'Отказано регистратором/вышестоящим депозитарием',
-      'Исполнено',
-      'Отменено'
-    ];
-
-    return possible[Math.floor((Math.random()) * possible.length)];
+  generatefromGiven(givenArray: any[]) {
+    return givenArray[Math.floor((Math.random()) * givenArray.length)];
   }
 }

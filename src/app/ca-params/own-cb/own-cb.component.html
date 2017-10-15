@@ -6,8 +6,8 @@
 </div>
 
 <div>
-  <p-dataTable [value]="accounts" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10" [rowsPerPageOptions]="[10,50,100]"
-    selectionMode="single" [(selection)]="selectedAccount" (onRowSelect)="accountOnRowSelect($event)" dataKey="id">
+  <p-dataTable [value]="accounts" selectionMode="multiple" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10" [rowsPerPageOptions]="[10,50,100]"
+    [(selection)]="selectedAccount" (onRowSelect)="accountOnRowSelect($event)" dataKey="id">
     <p-header>Счета / субсчета</p-header>
 
     <p-column field="accountNumber" header="Номер счета / субсчета"></p-column>
@@ -99,11 +99,11 @@
 <div>
   <p-dataTable [value]="instructions" selectionMode="multiple" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10"
     [rowsPerPageOptions]="[10,50,100]" [(selection)]="selectedInstructions" dataKey="id">
-    <p-header>Инструкции по счету / субсчкту</p-header>
+    <p-header>Инструкции по счету / субсчету</p-header>
 
     <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
     <p-column field="instrNumber" header="Номер"></p-column>
-    <p-column field="instrStatus" header="Статус" [style]="{'overflow':'hidden'}"></p-column>
+    <p-column field="instrStatus" header="Статус" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
     <p-column field="instrCreateDate" header="Дата создания" [style]="{'overflow':'hidden'}"></p-column>
     <p-column field="instrrejectionReason" header="Причина отказа" [style]="{'overflow':'hidden'}"></p-column>
     <p-column field="instrCbCount" header="Количество ЦБ" [style]="{'overflow':'hidden'}"></p-column>

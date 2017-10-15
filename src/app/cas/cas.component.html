@@ -1,3 +1,79 @@
-<p>
-  cas works!
-</p>
+<div class="cas-main-content">
+  <p-panel header="Title" [toggleable]="true">
+    <p>
+      Content
+    </p>
+
+    <p>
+      Content
+    </p>
+
+    <p>
+      Content
+    </p>
+
+    <p>
+      Content
+    </p>
+
+    <p>
+      Content
+    </p>
+
+    <p>
+      Content
+    </p>
+  </p-panel>
+
+  <div class="delimeter"></div>
+
+  <div>
+    <p-dataTable [value]="cas" selectionMode="multiple" [responsive]="true" [rows]="10" [paginator]="true" [pageLinks]="10" [rowsPerPageOptions]="[10,50,100]"
+      [(selection)]="selectedCas" dataKey="id"  resizableColumns="true">
+      <p-header>
+        <div class="ui-g">
+          <div class="ui-g-4 toleft">
+            .
+          </div>
+
+          <div class="ui-g-4">
+            .
+          </div>
+
+          <div class="ui-g-4 toright">
+            <button pButton type="button" (click)="refrashCas()" icon="fa-refresh" class="ui-button-secondary"
+              label="Обновить"></button>
+          </div>
+        </div>
+      </p-header>
+
+      <p-column [style]="{'width':'38px','height':'38px'}" selectionMode="multiple"></p-column>
+      <p-column field="reference" header="Референс" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}">
+          <ng-template let-ca="rowData" pTemplate="body">
+              <button type="button" class="ui-button-secondary" pButton (click)="selectCa(ca)" label="{{ca.reference}}"></button>
+          </ng-template>
+      </p-column>
+      <p-column field="type" header="Код типа КД" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="compType" header="Тип обязательности" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="status" header="Статус КД" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="fixDate" header="Дата фиксации" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="dateStart" header="Дата проведения" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="isin" header="ISIN" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="grn" header="ГРН" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="code" header="Код" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="registrator" header="Регистратор" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="dateEnd" header="Дата окончания приема инструкций" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+      <p-column field="emitent" header="Эмитент" [style]="{'overflow':'hidden','text-overflow':'ellipsis'}"></p-column>
+
+      <ng-template pTemplate="emptymessage">
+        Нет данных для отображения
+      </ng-template>
+
+      <!-- <p-footer> -->
+      <!-- <ul> -->
+      <!-- <li *ngFor="let instr of selectedInstructions" style="text-align: left">{{instr.id}}</li> -->
+      <!-- </ul> -->
+      <!-- </p-footer> -->
+    </p-dataTable>
+  </div>
+</div>

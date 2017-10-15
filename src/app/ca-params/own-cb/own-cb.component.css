@@ -1,7 +1,11 @@
-:host /deep/ .ui-datatable-header {
+/* :host /deep/ .ui-datatable-header {
           font-weight: bolder;
-          /* height: 40px; */
 }
+
+:host /deep/ .ui-column-title {
+          font-weight: bolder;
+}
+
 :host /deep/ .ui-button.ui-state-default {
           font-size: x-large;
           border-color: transparent;
@@ -9,7 +13,7 @@
 }
 
 :host /deep/ .ui-cell-data {
-          overflow: hidden !important;
+          white-space: nowrap;
 }
 
 .table-button {
@@ -27,4 +31,4 @@
 
 toright {
           text-align: right;
-}
+} */

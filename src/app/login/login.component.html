@@ -1,3 +1,28 @@
 <p-sidebar [(visible)]="showLogin" [fullScreen]="true" [baseZIndex]="100000">
-    <button pButton type="button" (click)="showLogin = false" label="Cancel" class="ui-button-secondary"></button>
+
+    <div class="login-fields">
+        <div class="single-field">
+            <div class="ui-float-label">
+                <input id="float-input" type="text" size="30" pInputText [(ngModel)]="username" (keyup.enter)="login()">
+                <label for="float-input">Логин</label>
+            </div>
+        </div>
+
+        <div class="single-field">
+            <div class="ui-float-label">
+                <input id="float-input" type="text" size="30" pInputText [(ngModel)]="password" (keyup.enter)="login()">
+                <label for="float-input">Пароль</label>
+            </div>
+        </div>
+
+        <div class="single-field login-button">
+            <button pButton type="button" (click)="login()" label="Войти" class="ui-button-secondary"></button>
+        </div>
+
+        <div class="single-field">
+            <p>Логин: egar</p>
+            <p>Пароль: egar</p>
+        </div>                
+    </div>
+
 </p-sidebar>

@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { AuthService } from './../core/auth.service';
 import { EventKeeperBoxService } from './../core/event-keeper-box.service';
 
 import { MenuItem } from 'primeng/primeng';
@@ -17,7 +19,8 @@ export class HeaderComponent implements OnInit {
 
   displayVersionDialog = false;
 
-  constructor(private eventKeeperBox: EventKeeperBoxService) { }
+  constructor(private authServise: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -27,6 +30,7 @@ export class HeaderComponent implements OnInit {
   }
 
   exit() {
-    this.eventKeeperBox.setShowLogin(true);
+    this.authServise.logout();
+    this.router.navigate(['login']);
   }
 }

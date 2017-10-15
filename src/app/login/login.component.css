@@ -1,3 +1,14 @@
 :host /deep/ .ui-sidebar-close {
           color: transparent;
 }
+.single-field {
+          margin-top: 20px;
+}
+
+.login-fields {
+          margin: 100px;
+}
+
+.login-button {
+          width: 100%;
+}

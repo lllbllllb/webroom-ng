@@ -17,8 +17,9 @@ export class OwnCbComponent implements OnInit {
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   accounts: AccountCb[];
-  selectedAccount: AccountCb;
+  selectedAccount: AccountCb[];
 
+  allSections: AccountSection[];
   accountSections: AccountSection[];
   accountSectionsLastUpdateTime: string;
 
@@ -37,12 +38,19 @@ export class OwnCbComponent implements OnInit {
     this.http.get<AccountCb[]>('/api/ownCbAccounts')
       .subscribe(accounts => {
         this.accounts = accounts;
-        this.selectedAccount = this.accounts[0];
+        this.selectedAccount = [this.accounts[0]];
       });
 
     this.http.get<AccountSection[]>('/api/ownAccountSections')
       .subscribe(sections => {
-        this.accountSections = sections;
+        this.allSections = sections;
+        const secBuff = [];
+        for (const a of sections) {
+          if (a.accountId === this.selectedAccount[0].id) {
+            secBuff.push(a);
+          }
+        }
+        this.accountSections = secBuff;
 
         for (let i = 0; i < sections.length; i++) {
           this.totalCurrentBalance += sections[i].currentBalance;
@@ -127,14 +135,27 @@ export class OwnCbComponent implements OnInit {
   updateAllInstr() { }
 
   accountOnRowSelect(event) {
-    const api_path = '/api/ownCbinstructions_' + this.selectedAccount.id;
+    if (this.selectedAccount.length === 1) {
+      const api_path = '/api/ownCbinstructions_' + this.selectedAccount[0].id;
 
-    this.selectedInstructions = [];
+      this.selectedInstructions = [];
 
-    this.http.get<Instruction[]>(api_path)
-      .subscribe(instructions => {
-        this.instructions = instructions;
-      });
+      this.http.get<Instruction[]>(api_path)
+        .subscribe(instructions => {
+          this.instructions = instructions;
+        });
+
+      const secBuff = [];
+      for (const a of this.allSections) {
+        if (a.accountId === this.selectedAccount[0].id) {
+          secBuff.push(a);
+        }
+      }
+      this.accountSections = secBuff;
+    } else {
+      this.instructions = [];
+      this.accountSections = [];
+    }
   }
 
   removeInstrDisable() {
