@@ -6,12 +6,12 @@ const http = require('http');
 
 const app = express();
 
-app.use(express.static(__dirname, 'dist'));
+app.use(express.static(__dirname + '/dist'));
 
 console.log('step 1 fired!');
 
 app.get('*', (req, res) => {
-  res.sendFile(__dirname, 'dist', 'index.html');
+  res.sendFile(__dirname, 'index.html');
 })
 
 console.log('step 2 fired!');
