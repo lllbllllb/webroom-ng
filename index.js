@@ -3,8 +3,6 @@ const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(path.join(__dirname, '/')));
-
 // views is directory for all template files
 // app.set('views', __dirname);
 
@@ -13,5 +11,5 @@ app.use(express.static(path.join(__dirname, '/')));
 // });
 
 app.get('*', (req, res) => {
-          res.sendFile(path.join(__dirname, 'index.html'));
+          res.sendFile('/index.html');
 })
