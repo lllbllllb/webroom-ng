@@ -19,8 +19,11 @@ app.get('*', (req, res) => {
 
 console.log('4) mbllllb running!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
-const server = http.createServer(app);
-server.listen(port, () => console.log('mbllllb running!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'));
+// const server = http.createServer(app);
+// server.listen(port, () => console.log('mbllllb running!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'));
+module.exports = app;
+
+console.log('5) mbllllb running!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
 // app.get('/', function(request, response) {
 //   response.render('index');
