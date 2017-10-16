@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  private breadCrumbsItems: MenuItem[];
+  breadCrumbsItems: MenuItem[];
 
   constructor(private eventKeeperBox: EventKeeperBoxService,
     private logger: Logger) { }
