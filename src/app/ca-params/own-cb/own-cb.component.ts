@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { Logger } from './../../core/logger.service';
 import { Instruction } from './entities/instruction';
 import { AccountSection } from './entities/account-section';
