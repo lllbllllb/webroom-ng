@@ -6,7 +6,7 @@ const http = require('http');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '')))
+app.use(express.static(path.join(__dirname, 'dist')))
 
 console.log('step 1 fired!');
 
