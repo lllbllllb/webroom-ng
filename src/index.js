@@ -16,12 +16,12 @@ app.get('*', (req, res) => {
 
 console.log('step 2 fired!');
 
-app.set('port', (process.env.PORT || 5000));
+const port = process.env.PORT || '5000';
+app.set('port', port);
 
 console.log('step 3 fired!')
 
 const server = http.createServer(app);
 server.listen(port, () => console.log('Running! (step 3b fired)'))
-// module.exports = app;
 
 console.log('step 4 fired!')
