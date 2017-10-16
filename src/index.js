@@ -6,7 +6,7 @@ const http = require('http');
 
 const app = express();
 
-app.use(express.static(path.join(__ditname, 'index.html')))
+app.use(express.static(path.join(__dirname, 'index.html')))
 
 console.log('step 1 fired!');
 
