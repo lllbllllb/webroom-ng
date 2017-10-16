@@ -71,20 +71,22 @@ export class OwnCbComponent implements OnInit {
   editAccount() { }
 
   removeAccount() {
-    // const api_path = '/api/accounts/' + this.selectedAccount.id;
+    const api_path = '/api/accounts/' + this.selectedAccount[0].id;
 
-    // this.http.delete<AccountCb[]>(api_path)
-    // .subscribe(accounts => {
-    //   this.logger.info('!!!');
-    //   this.accounts = accounts;
-    //   this.selectedAccount = this.accounts[0];
-    // });
+    this.http.delete<AccountCb[]>(api_path)
+    .subscribe(accounts => {
+      this.logger.info('!!!');
+      this.accounts = accounts;
+      this.selectedAccount[0] = this.accounts[0];
+    });
 
-    // this.http.get<AccountCb[]>('/api/ownCbAccounts')
-    //   .subscribe(accounts => {
-    //     this.accounts = accounts;
-    //     this.selectedAccount = this.accounts[0];
-    //   });
+    this.logger.info('1111');
+
+    this.http.get<AccountCb[]>('/api/ownCbAccounts')
+      .subscribe(accounts => {
+        this.accounts = accounts;
+        this.selectedAccount[0] = this.accounts[0];
+      });
 
   }
 
