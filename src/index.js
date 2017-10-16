@@ -9,7 +9,7 @@ app.set('port', (process.env.PORT || 5000));
 console.log('2) mbllllb running!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
 // views is directory for all template files
-app.use(expect.static(path.join(__dirname, 'src')))
+app.use(express.static(path.join(__dirname, 'src')))
 // app.set('views', __dirname);
 console.log('3) mbllllb running!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
